@@ -5,7 +5,7 @@ import re,os,sys
 from urllib import request
 from urllib.parse import quote
 from telebot import types
- 
+
 key= os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(str(key))
 alphabet = ['Ь', 'ь', 'Ъ', 'ъ', 'А', 'а', 'Б', 'б', 'В', 'в', 'Г', 'г', 'Д', 'д', 'Е', 'е', 'Ё', 'ё',
