@@ -6,7 +6,8 @@ from urllib import request
 from urllib.parse import quote
 from telebot import types
  
-bot = telebot.TeleBot('1411970649:AAGoRd2jMQIUQLMOxp7iZ2yg5fqFWOBm0ao')
+key= os.environ.get('BOT_TOKEN')
+bot = telebot.TeleBot(str(key))
 alphabet = ['Ь', 'ь', 'Ъ', 'ъ', 'А', 'а', 'Б', 'б', 'В', 'в', 'Г', 'г', 'Д', 'д', 'Е', 'е', 'Ё', 'ё',
             'Ж', 'ж', 'З', 'з', 'И', 'и', 'Й', 'й', 'К', 'к', 'Л', 'л', 'М', 'м', 'Н', 'н', 'О', 'о',
             'П', 'п', 'Р', 'р', 'С', 'с', 'Т', 'т', 'У', 'у', 'Ф', 'ф', 'Х', 'х', 'Ц', 'ц', 'Ч', 'ч',
