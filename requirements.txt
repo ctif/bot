@@ -1,5 +1,1 @@
-telebot
-urllib
-re
-os
-sys
+pyTelegramBotAPI==3.7.4
