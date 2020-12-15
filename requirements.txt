@@ -1,3 +1,4 @@
 pyTelegramBotAPI==3.7.4
 requests==2.25.0
 urllib3==1.26.2
+beautifulsoup4==4.9.3
