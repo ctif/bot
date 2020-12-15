@@ -1,9 +1,9 @@
 import telebot
-import urllib
+import html5lib
 import re,os,sys
+import urllib.request
 
-from urllib import request
-from urllib.parse import quote
+from bs4 import BeautifulSoup
 from telebot import types
 
 bot = telebot.TeleBot('1411970649:AAGoRd2jMQIUQLMOxp7iZ2yg5fqFWOBm0ao')
@@ -21,23 +21,43 @@ def welcome(message):
 def lalala(message):
             mas=''
             umr=''
+            link=''
             for x in message.text:
                 if x==' ':
                     umr+='+'
                 else:
                     umr+=x
             if list(set(alphabet) & set(message.text)):
-                bot.send_message(message.chat.id,"сообщения должны быть на англиском")
+                bot.send_message(message.chat.id, "сообщения должны быть на анлийском")
             else:
                 sq='https://www.youtube.com/results?search_query='+umr
-                doc=urllib.request.urlopen(sq).read().decode('cp1251',errors='ignore')
+                doc=urllib.request.urlopen(sq).read().decode('utf-8','ignore')
                 match=re.findall("\?v\=(.+?)\"",doc)
                 if match:
                     for ii in match:
                         if (len(ii)<25):
                             mas="https://www.youtube.com/watch?v="+ii
+                            link=callback_inline(ii)
                             break
-                bot.send_message(message.chat.id, mas)
+                markup = types.InlineKeyboardMarkup(row_width=2)
+                item1 = types.InlineKeyboardButton("Скачать", url=link)
+                markup.add(item1)
+                bot.send_message(message.chat.id, mas,reply_markup=markup)
                 mas=dict(zip(mas,mas)).values()
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    try:
+        if call.message:
+            mas="https://www.ssyoutube.com/watch?v="+call.gata
+            sauce = urllib.request.urlopen(mas)
+            soup = BeautifulSoup(sauce, 'lxml')
+
+            body=soup.body
+            for url in body.find_all(attrs={"class":"link link-download subname ga_track_events download-icon"}):
+                link = url.get('href')
+                return link
+    except Exception as e:
+        print(repr(e))
 # RUN
 bot.polling(none_stop=True)
