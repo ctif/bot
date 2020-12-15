@@ -37,27 +37,23 @@ def lalala(message):
                     for ii in match:
                         if (len(ii)<25):
                             mas="https://www.youtube.com/watch?v="+ii
-                            link=callback_inline(ii)
+#                            link=getlink(ii)
                             break
-                markup = types.InlineKeyboardMarkup(row_width=2)
-                item1 = types.InlineKeyboardButton("Скачать", url=link)
-                markup.add(item1)
-                bot.send_message(message.chat.id, mas,reply_markup=markup)
+#                markup = types.InlineKeyboardMarkup(row_width=2)
+ #               item1 = types.InlineKeyboardButton("Скачать", url=link)
+ #               markup.add(item1)
+ #reply_markup=markup
+                bot.send_message(message.chat.id, mas)
                 mas=dict(zip(mas,mas)).values()
 
-@bot.callback_query_handler(func=lambda call: True)
-def callback_inline(call):
-    try:
-        if call.message:
-            mas="https://www.ssyoutube.com/watch?v="+call.gata
-            sauce = urllib.request.urlopen(mas)
-            soup = BeautifulSoup(sauce, 'lxml')
-
-            body=soup.body
-            for url in body.find_all(attrs={"class":"link link-download subname ga_track_events download-icon"}):
-                link = url.get('href')
-                return link
-    except Exception as e:
-        print(repr(e))
+#def getlink(ii):
+#    mas="https://www.ssyoutube.com/watch?v="+ii
+ #   sauce = urllib.request.urlopen(mas)
+ #   soup = BeautifulSoup(sauce, 'lxml')
+  #  body=soup.body
+   # for url in body.find_all(attrs={"class": "link link-download subname ga_track_events download-icon"}):
+    #    link = url.get('href')
+     #   break
+   # return link
 # RUN
 bot.polling(none_stop=True)
